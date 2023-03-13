@@ -1,0 +1,185 @@
+WARNING:tensorflow:From /content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./trainer/vae.py:80: Supervisor.__init__ (from tensorflow.python.training.supervisor) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please switch to tf.train.MonitoredTrainingSession
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Starting standard services.
+INFO:tensorflow:Saving checkpoint to path logdir/train/0313-0302-11-2023/model.ckpt
+INFO:tensorflow:Starting queue runners.
+INFO:tensorflow:global_step/sec: 0
+INFO:tensorflow:Error reported to Coordinator: Graph execution error:
+
+Detected at node 'loss/Encoder/Conv2d-0/Conv2d-0/Conv2D' defined at (most recent call last):
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 81, in <module>
+      main()
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 75, in main
+      loss = machine.loss(image, label)
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 112, in loss
+      z_mu, z_lv = self._encode(x)
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 79, in _encoder
+      x = conv2d_nchw_layernorm(
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./util/layers.py", line 59, in conv2d_nchw_layernorm
+      x = tf.layers.conv2d(
+    File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/convolutional.py", line 595, in conv2d
+      return layer(inputs)
+    File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/base.py", line 622, in __call__
+      outputs = super().__call__(inputs, *args, **kwargs)
+    File "/usr/local/lib/python3.9/dist-packages/keras/engine/base_layer_v1.py", line 838, in __call__
+      outputs = call_fn(cast_inputs, *args, **kwargs)
+    File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 283, in call
+      outputs = self.convolution_op(inputs, self.kernel)
+    File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 255, in convolution_op
+      return tf.nn.convolution(
+Node: 'loss/Encoder/Conv2d-0/Conv2d-0/Conv2D'
+The Conv2D op currently only supports the NHWC tensor format on the CPU. The op was given the format: NCHW
+	 [[{{node loss/Encoder/Conv2d-0/Conv2d-0/Conv2D}}]]
+
+Original stack trace for 'loss/Encoder/Conv2d-0/Conv2d-0/Conv2D':
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 81, in <module>
+    main()
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 75, in main
+    loss = machine.loss(image, label)
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 112, in loss
+    z_mu, z_lv = self._encode(x)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/template.py", line 407, in __call__
+    return self._call_func(args, kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/template.py", line 369, in _call_func
+    result = self._func(*args, **kwargs)
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 79, in _encoder
+    x = conv2d_nchw_layernorm(
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./util/layers.py", line 59, in conv2d_nchw_layernorm
+    x = tf.layers.conv2d(
+  File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/convolutional.py", line 595, in conv2d
+    return layer(inputs)
+  File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/base.py", line 622, in __call__
+    outputs = super().__call__(inputs, *args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/keras/engine/base_layer_v1.py", line 838, in __call__
+    outputs = call_fn(cast_inputs, *args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 283, in call
+    outputs = self.convolution_op(inputs, self.kernel)
+  File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 255, in convolution_op
+    return tf.nn.convolution(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/util/traceback_utils.py", line 150, in error_handler
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/util/dispatch.py", line 1176, in op_dispatch_handler
+    return dispatch_target(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/nn_ops.py", line 1181, in convolution_v2
+    return convolution_internal(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/nn_ops.py", line 1313, in convolution_internal
+    return op(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/nn_ops.py", line 2787, in _conv2d_expanded_batch
+    return gen_nn_ops.conv2d(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/gen_nn_ops.py", line 1145, in conv2d
+    _, _, _op, _outputs = _op_def_library._apply_op_helper(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/framework/op_def_library.py", line 795, in _apply_op_helper
+    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/framework/ops.py", line 3798, in _create_op_internal
+    ret = Operation(
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 1378, in _do_call
+    return fn(*args)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 1361, in _run_fn
+    return self._call_tf_sessionrun(options, feed_dict, fetch_list,
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 1454, in _call_tf_sessionrun
+    return tf_session.TF_SessionRun_wrapper(self._session, options, feed_dict,
+tensorflow.python.framework.errors_impl.UnimplementedError: The Conv2D op currently only supports the NHWC tensor format on the CPU. The op was given the format: NCHW
+	 [[{{node loss/Encoder/Conv2d-0/Conv2d-0/Conv2D}}]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/training/coordinator.py", line 293, in stop_on_exception
+    yield
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/training/coordinator.py", line 493, in run
+    self.run_loop()
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/training/supervisor.py", line 1040, in run_loop
+    summary_strs, global_step = self._sess.run(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 968, in run
+    result = self._run(None, fetches, feed_dict, options_ptr,
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 1191, in _run
+    results = self._do_run(handle, final_targets, final_fetches,
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 1371, in _do_run
+    return self._do_call(_run_fn, feeds, fetches, targets, options,
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/client/session.py", line 1397, in _do_call
+    raise type(e)(node_def, op, message)  # pylint: disable=no-value-for-parameter
+tensorflow.python.framework.errors_impl.UnimplementedError: Graph execution error:
+
+Detected at node 'loss/Encoder/Conv2d-0/Conv2d-0/Conv2D' defined at (most recent call last):
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 81, in <module>
+      main()
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 75, in main
+      loss = machine.loss(image, label)
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 112, in loss
+      z_mu, z_lv = self._encode(x)
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 79, in _encoder
+      x = conv2d_nchw_layernorm(
+    File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./util/layers.py", line 59, in conv2d_nchw_layernorm
+      x = tf.layers.conv2d(
+    File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/convolutional.py", line 595, in conv2d
+      return layer(inputs)
+    File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/base.py", line 622, in __call__
+      outputs = super().__call__(inputs, *args, **kwargs)
+    File "/usr/local/lib/python3.9/dist-packages/keras/engine/base_layer_v1.py", line 838, in __call__
+      outputs = call_fn(cast_inputs, *args, **kwargs)
+    File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 283, in call
+      outputs = self.convolution_op(inputs, self.kernel)
+    File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 255, in convolution_op
+      return tf.nn.convolution(
+Node: 'loss/Encoder/Conv2d-0/Conv2d-0/Conv2D'
+The Conv2D op currently only supports the NHWC tensor format on the CPU. The op was given the format: NCHW
+	 [[{{node loss/Encoder/Conv2d-0/Conv2d-0/Conv2D}}]]
+
+Original stack trace for 'loss/Encoder/Conv2d-0/Conv2d-0/Conv2D':
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 81, in <module>
+    main()
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./main.py", line 75, in main
+    loss = machine.loss(image, label)
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 112, in loss
+    z_mu, z_lv = self._encode(x)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/template.py", line 407, in __call__
+    return self._call_func(args, kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/template.py", line 369, in _call_func
+    result = self._func(*args, **kwargs)
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./model/vae.py", line 79, in _encoder
+    x = conv2d_nchw_layernorm(
+  File "/content/Voice-Conversion-from-Non-parallel-Corpora-Using-Variational-Auto-encoder./util/layers.py", line 59, in conv2d_nchw_layernorm
+    x = tf.layers.conv2d(
+  File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/convolutional.py", line 595, in conv2d
+    return layer(inputs)
+  File "/usr/local/lib/python3.9/dist-packages/keras/legacy_tf_layers/base.py", line 622, in __call__
+    outputs = super().__call__(inputs, *args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/keras/engine/base_layer_v1.py", line 838, in __call__
+    outputs = call_fn(cast_inputs, *args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 283, in call
+    outputs = self.convolution_op(inputs, self.kernel)
+  File "/usr/local/lib/python3.9/dist-packages/keras/layers/convolutional/base_conv.py", line 255, in convolution_op
+    return tf.nn.convolution(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/util/traceback_utils.py", line 150, in error_handler
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/util/dispatch.py", line 1176, in op_dispatch_handler
+    return dispatch_target(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/nn_ops.py", line 1181, in convolution_v2
+    return convolution_internal(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/nn_ops.py", line 1313, in convolution_internal
+    return op(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/nn_ops.py", line 2787, in _conv2d_expanded_batch
+    return gen_nn_ops.conv2d(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/ops/gen_nn_ops.py", line 1145, in conv2d
+    _, _, _op, _outputs = _op_def_library._apply_op_helper(
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/framework/op_def_library.py", line 795, in _apply_op_helper
+    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
+  File "/usr/local/lib/python3.9/dist-packages/tensorflow/python/framework/ops.py", line 3798, in _create_op_internal
+    ret = Operation(
+
